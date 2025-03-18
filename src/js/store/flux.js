@@ -1,43 +1,67 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			characters: [],
+			planets: [],
+			vehicles: [],
+			favorites: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			
+			getCharacters : async () => {
+				try {
+				const response = await fetch("https://swapi.dev/api/people")
+				console.log(response)
+				const data = await response.json()
+				console.log(data.results)
+				setStore({characters:data.results})
+				} catch (error) {
+					console.error(error)
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+
+			getPlanets : async () => {
+				try {
+					const response = await fetch("https://swapi.dev/api/planets")
+					console.log(response)
+					const data = await response.json()
+					console.log(data.results)
+					setStore({planets : data.results})
+					} catch (error) {
+						console.error(error)
+					}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getVehicles: async () => {
+				try {
+					const response = await fetch("https://swapi.dev/api/vehicles");
+					
+					if (!response.ok) {
+						throw new Error(`HTTP error! Status: ${response.status}`);
+					}
+			
+					const data = await response.json();
+					console.log("Vehicles:", data.results);
+					
+					setStore({ vehicles: data.results }); // Ensure setStore is accessible
+				} catch (error) {
+					console.error("Error fetching vehicles:", error);
+				}
+			},
+			
 
-				//reset the global store
-				setStore({ demo: demo });
+			addFavorites : async () => {
+				try {
+					const response = await fetch ("")
+					console.log(response)
+					const data = await response.json()
+					console.log()
+				} catch (error) {
+					console.log(error)
+				}
 			}
+			
 		}
 	};
 };
