@@ -1,24 +1,21 @@
 import React, {useContext} from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import peopleData from "../../img/people.json";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 
-const Character = ({ name, eyeColor, gender, hairColor, id }) => {
-    const peopleImage = peopleData.people.find(p => p.id === id)?.image || "https://via.placeholder.com/300";
+const Vehicles = ({model, manufacturer, name, id}) => {
     const{actions, store} = useContext(Context)
+    
     return (
 
         <div className="card" style={{ width: "16rem", flex: "none", margin: "10px" }}>
-            <img src={peopleImage} className="card-img-top" alt={name} style= {{height:"22rem"}}/>
+            <img src="..." className="card-img-top" alt={name} />
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
-                <p className="card-text">Eye color: {eyeColor}</p>
-                <p className="card-text">Hair color: {hairColor}</p>
-                <p className="card-text">Gender: {gender}</p>
+                <p className="card-text">Model: {model}</p>
+                <p className="card-text">Manufacturer: {manufacturer}</p>
                 <div className="d-flex justify-content-between">
-                    <Link to= {"/singleCharacter/" + (id+1)} className="btn btn-outline-primary">Learn more!</Link>
+                    <a href="#" className="btn btn-outline-primary">Learn more!</a>
                     <button
                         className="btn btn-outline-danger"
                         onClick={() => actions.addFavorite(name)}
@@ -31,4 +28,4 @@ const Character = ({ name, eyeColor, gender, hairColor, id }) => {
           
     )
 }
-export default Character
+export default Vehicles
