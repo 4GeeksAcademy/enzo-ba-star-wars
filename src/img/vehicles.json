@@ -1,0 +1,54 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "name": "Sand Crawler",
+      "image": "https://static.wikia.nocookie.net/starwars/images/5/50/SandCrawler-DB.png/revision/latest?cb=20130310031742"
+    },
+    {
+      "id": 2,
+      "name": "T-16 Skyhopper",
+      "image": "https://static.wikia.nocookie.net/starwars/images/2/20/SkyhopperHS-ANH.png/revision/latest?cb=20130305010406"
+    },
+    {
+      "id": 3,
+      "name": "X-34 Landspeeder",
+      "image": "https://static.wikia.nocookie.net/starwars/images/2/2e/LandspeederHS-ANH.png/revision/latest?cb=20130305010406"
+    },
+    {
+      "id": 4,
+      "name": "TIE Fighter",
+      "image": "https://static.wikia.nocookie.net/starwars/images/3/3e/TIEfighter-SWCT.png/revision/latest?cb=20160711041203"
+    },
+    {
+      "id": 5,
+      "name": "Snowspeeder",
+      "image": "https://static.wikia.nocookie.net/starwars/images/8/84/Snowspeeder_DICE.png/revision/latest?cb=20151218185420"
+    },
+    {
+      "id": 6,
+      "name": "TIE Bomber",
+      "image": "https://static.wikia.nocookie.net/starwars/images/2/2a/TIEbomber-DB.png/revision/latest?cb=20130310031811"
+    },
+    {
+      "id": 7,
+      "name": "AT-AT",
+      "image": "https://static.wikia.nocookie.net/starwars/images/e/e3/AT-AT_TCW.png/revision/latest?cb=20121014212228"
+    },
+    {
+      "id": 8,
+      "name": "AT-ST",
+      "image": "https://static.wikia.nocookie.net/starwars/images/7/77/AT-ST_DB.png/revision/latest?cb=20130310031839"
+    },
+    {
+      "id": 9,
+      "name": "Storm IV Twin-Pod Cloud Car",
+      "image": "https://static.wikia.nocookie.net/starwars/images/3/3a/CloudCar-SWCT.png/revision/latest?cb=20160711041142"
+    },
+    {
+      "id": 10,
+      "name": "Sail Barge",
+      "image": "https://static.wikia.nocookie.net/starwars/images/9/9d/JabbaSailBarge-SWCT.png/revision/latest?cb=20160711041230"
+    }
+  ]
+}

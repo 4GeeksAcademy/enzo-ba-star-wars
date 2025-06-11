@@ -1,31 +1,27 @@
-import React, {useContext} from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import Card from "./card.jsx";
+import vehiclesData from "../../img/vehicles.json";
 
-const Vehicles = ({model, manufacturer, name, id}) => {
-    const{actions, store} = useContext(Context)
-    
+const STOCK_VEHICLE_IMAGE = "https://starwars-visualguide.com/assets/img/vehicles/4.jpg"; // Sand Crawler
+
+const Vehicles = ({ model, manufacturer, name, id }) => {
+    const { actions, store } = useContext(Context);
+
+    // Try to find image by id, else use stock image
+    const vehicleImage = vehiclesData.vehicles.find(v => v.id === id)?.image || STOCK_VEHICLE_IMAGE;
+
+    const description = `Model: ${model} | Manufacturer: ${manufacturer}`;
+
     return (
+        <Card
+            name={name}
+            desc={description}
+            id={id}
+            type="vehicle"
+            image={vehicleImage}
+        />
+    );
+};
 
-        <div className="card" style={{ width: "16rem", flex: "none", margin: "10px" }}>
-            <img src="..." className="card-img-top" alt={name} />
-            <div className="card-body">
-                <h5 className="card-title">{name}</h5>
-                <p className="card-text">Model: {model}</p>
-                <p className="card-text">Manufacturer: {manufacturer}</p>
-                <div className="d-flex justify-content-between">
-                    <a href="#" className="btn btn-outline-primary">Learn more!</a>
-                    <button
-                        className="btn btn-outline-danger"
-                        onClick={() => actions.addFavorite(name)}
-                    >
-                        <FontAwesomeIcon icon={faHeart} />
-                    </button>
-                </div>
-            </div>
-        </div>
-          
-    )
-}
-export default Vehicles
+export default Vehicles;

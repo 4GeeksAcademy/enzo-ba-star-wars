@@ -1,86 +1,102 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			characters: [],
-			planets: [],
-			vehicles: [],
-			favorites: [],
-			character: {},
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
+  return {
+    store: {
+      characters: [],
+      planets: [],
+      vehicles: [],
+      favorites: [],
+      character: {},
+    },
+    actions: {
+      getCharacters: async () => {
+        try {
+          const response = await fetch("https://swapi.tech/api/people");
+          const data = await response.json();
 
-			getCharacters: async () => {
-				try {
-					const response = await fetch("https://swapi.dev/api/people")
-					console.log(response)
-					const data = await response.json()
-					console.log(data.results)
-					setStore({ characters: data.results })
-				} catch (error) {
-					console.error(error)
-				}
-			},
-			getSingleCharacters: async (id) => {
-				try {
-					const response = await fetch("https://swapi.dev/api/people/" + id)
-					const data = await response.json()
-					console.log(data)
-					setStore({ character: data })
-				} catch (error) {
-					console.error(error)
-				}
-			},
+          // Enhance characters with image URLs
+          const charactersWithImages = data.results.map((char, index) => ({
+            ...char,
+            // Using starwars-visualguide as image source
+            image: `https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg`
+          }));
 
-			getPlanets: async () => {
-				try {
-					const response = await fetch("https://swapi.dev/api/planets")
-					console.log(response)
+          setStore({ characters: charactersWithImages });
+        } catch (error) {
+          console.error(error);
+        }
+      },
 
-					if (!response.ok) {
-						throw new Error("HTTP Error!!");
-					}
-					const data = await response.json()
-					console.log(data.results)
-					setStore({ planets: data.results })
-				} catch (error) {
-					console.error(error)
-				}
-			},
+      getSingleCharacters: async (id) => {
+        try {
+          const response = await fetch(`https://swapi.tech/api/people/${id}`);
+          const data = await response.json();
 
-			getVehicles: async () => {
-				try {
-					const response = await fetch("https://swapi.dev/api/vehicles");
+          // Add image URL to single character
+          const characterWithImage = {
+            ...data,
+            image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+          };
 
-					if (!response.ok) {
-						throw new Error(`HTTP error! Status: ${response.status}`);
-					}
+          setStore({ character: characterWithImage });
+        } catch (error) {
+          console.error(error);
+        }
+      },
 
-					const data = await response.json();
-					console.log("Vehicles:", data.results);
+      getPlanets: async () => {
+        try {
+          const response = await fetch("https://swapi.tech/api/planets");
+          const data = await response.json();
 
-					setStore({ vehicles: data.results }); // Ensure setStore is accessible
-				} catch (error) {
-					console.error("Error fetching vehicles:", error);
-				}
-			},
+          // Enhance planets with image URLs
+          const planetsWithImages = data.results.map((planet, index) => ({
+            ...planet,
+            // Using starwars-visualguide as image source
+            image: `https://starwars-visualguide.com/assets/img/planets/${index + 1}.jpg`
+          }));
 
+          setStore({ planets: planetsWithImages });
+        } catch (error) {
+          console.error(error);
+        }
+      },
 
-			addFavorite: (item) => {
-				const store = getStore();
-				if (!store.favorites.includes(item)) {
-					setStore({ favorites: [...store.favorites, item] });
-				}
-			},
+      getVehicles: async () => {
+        try {
+          const response = await fetch("https://swapi.tech/api/vehicles");
+          const data = await response.json();
 
-			removeFavorite: (item) => {
-				const store = getStore();
-				setStore({ favorites: store.favorites.filter(fav => fav !== item) });
-			},
+          // Enhance vehicles with image URLs
+          const vehiclesWithImages = data.results.map((vehicle, index) => ({
+            ...vehicle,
+            // Using starwars-visualguide as image source
+            image: `https://starwars-visualguide.com/assets/img/vehicles/${index + 1}.jpg`
+          }));
 
+          setStore({ vehicles: vehiclesWithImages });
+        } catch (error) {
+          console.error("Error fetching vehicles:", error);
+        }
+      },
 
-		}
-	};
+      addFavorite: (item) => {
+        const store = getStore();
+        // Use id and type for uniqueness
+        if (!store.favorites.some(fav => fav.id === item.id && fav.type === item.type)) {
+          setStore({ favorites: [...store.favorites, item] });
+        }
+      },
+
+      removeFavorite: (item) => {
+        const store = getStore();
+        setStore({
+          favorites: store.favorites.filter(
+            fav => !(fav.id === item.id && fav.type === item.type)
+          )
+        });
+      },
+    }
+  };
 };
 
 export default getState;

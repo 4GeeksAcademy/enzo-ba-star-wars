@@ -30,7 +30,7 @@ export const Home = () => {
 						eyeColor={item.eye_color}
 						gender={item.gender}
 						hairColor={item.hair_color}
-						id={index}
+						id={index + 1} 
 					/>
 				))}
 			</div>
@@ -40,11 +40,11 @@ export const Home = () => {
 			<div className="d-flex flex-row overflow-scroll mt-4">
 				{store.planets.map((item, index) => (
 					<Planets
-					key= {index}
-					name={item.name}
-					population={item.population}
-					terrain={item.terrain}
-					id={index}
+						key={index}
+						name={item.name}
+						population={item.population}
+						terrain={item.terrain}
+						id={index + 1} // <-- FIXED
 					/>
 				))}
 			</div>
@@ -54,11 +54,11 @@ export const Home = () => {
 			<div className="d-flex flex-row overflow-scroll mt-4">
 				{store.vehicles.map((item, index) => (
 					<Vehicles
-					key= {index}
-					model={item.model}
-					manufacturer= {item.manufacturer}
-					name= {item.name}
-					id= {index}
+						key={index}
+						model={item.model}
+						manufacturer={item.manufacturer}
+						name={item.name}
+						id={index + 1} // <-- FIXED
 					/>
 				))}
 			</div>
